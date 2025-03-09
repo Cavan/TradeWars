@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmpddm4bgqltj"]
+
+[ext_resource type="Texture2D" uid="uid://dp3pgiofpulln" path="res://player_weapons/HeavyCannon.png" id="1_sv8qm"]
+[ext_resource type="Script" path="res://player_weapons/Sprite2D.gd" id="2_o1ral"]
+[ext_resource type="PackedScene" uid="uid://bbljje1gf1vic" path="res://bullets/poutine_bullet.tscn" id="3_ct1c6"]
+[ext_resource type="AudioStream" uid="uid://vuvtjgbiug4u" path="res://assets/sound_effects/cannon_effect.wav" id="4_2jgjl"]
+
+[node name="Poutine_Gun" type="Node2D"]
+
+[node name="gun" type="Sprite2D" parent="."]
+position = Vector2(159, 489)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_sv8qm")
+script = ExtResource("2_o1ral")
+Bullet = ExtResource("3_ct1c6")
+
+[node name="Marker2D" type="Marker2D" parent="gun"]
+z_index = -1
+position = Vector2(60, -3)
+
+[node name="CannonSFX" type="AudioStreamPlayer2D" parent="gun"]
+stream = ExtResource("4_2jgjl")

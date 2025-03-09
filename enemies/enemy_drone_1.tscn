@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://dlgntwrk14g2e"]
+
+[ext_resource type="Script" path="res://enemies/Area2D.gd" id="1_8i8vp"]
+[ext_resource type="Texture2D" uid="uid://btvy2jaoxbr1k" path="res://enemies/UI_Flags_Indivudal_g880.png" id="1_gfoke"]
+[ext_resource type="Shader" path="res://enemies/enemy_drone_1.gdshader" id="2_bha6r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bimsr"]
+resource_local_to_scene = true
+shader = ExtResource("2_bha6r")
+shader_parameter/flash_color = Color(1, 0.996078, 1, 0.552941)
+shader_parameter/flash_value = null
+
+[sub_resource type="Animation" id="Animation_n0o03"]
+resource_name = "flash"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [null, 1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3klp8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/flash_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [null]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p4shw"]
+_data = {
+"RESET": SubResource("Animation_3klp8"),
+"flash": SubResource("Animation_n0o03")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yewkr"]
+size = Vector2(421, 272)
+
+[node name="Enemy" type="Area2D" groups=["enemies"]]
+scale = Vector2(0.7, 0.7)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_8i8vp")
+
+[node name="enemySprite" type="Sprite2D" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_bimsr")
+position = Vector2(998, 402)
+texture = ExtResource("1_gfoke")
+
+[node name="HitFlashPlayer" type="AnimationPlayer" parent="enemySprite"]
+libraries = {
+"": SubResource("AnimationLibrary_p4shw")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1001, 405)
+shape = SubResource("RectangleShape2D_yewkr")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

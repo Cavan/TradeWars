@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://6lcabb0c8yhm"]
+
+[ext_resource type="Texture2D" uid="uid://dx63kxrfwkgu2" path="res://levels/backgrounds/landscape.png" id="1_qxccn"]
+
+[node name="Level_1" type="Node2D"]
+z_index = -2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("1_qxccn")

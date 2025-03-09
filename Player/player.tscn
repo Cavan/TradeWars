@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cc4quhl7wscqo"]
+
+[ext_resource type="Texture2D" uid="uid://b3qvumb5vmeuv" path="res://Player/UI_Flags_Indivudal_g867.png" id="1_gc6ev"]
+[ext_resource type="Script" path="res://Player/player.gd" id="2_e0ip1"]
+[ext_resource type="PackedScene" uid="uid://cmpddm4bgqltj" path="res://player_weapons/poutine_gun.tscn" id="3_fhgcb"]
+
+[node name="Player" type="Sprite2D"]
+position = Vector2(885, 549)
+scale = Vector2(0.7, 0.685)
+texture = ExtResource("1_gc6ev")
+script = ExtResource("2_e0ip1")
+
+[node name="Poutine_Gun" parent="." instance=ExtResource("3_fhgcb")]
+position = Vector2(-112.857, -440.876)

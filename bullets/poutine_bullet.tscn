@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbljje1gf1vic"]
+
+[ext_resource type="Texture2D" uid="uid://etu6kfdxra44" path="res://assets/poutine.webp" id="1_4n0p0"]
+[ext_resource type="Script" path="res://bullets/poutine_bullet.gd" id="1_i2h6q"]
+[ext_resource type="PackedScene" uid="uid://kpo88adta0t2" path="res://vfx/impact_effect.tscn" id="2_4320u"]
+[ext_resource type="AudioStream" uid="uid://bqurvaowv7xow" path="res://assets/sound_effects/impact_splat.wav" id="3_s251p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uknoh"]
+radius = 293.0
+
+[node name="poutine_bullet" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_i2h6q")
+_impact_vfx = ExtResource("2_4320u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_4n0p0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1)
+scale = Vector2(0.2, 0.2)
+shape = SubResource("CircleShape2D_uknoh")
+
+[node name="BulletImpactSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_s251p")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
