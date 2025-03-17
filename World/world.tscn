@@ -24,10 +24,14 @@ position = Vector2(860, -65)
 position = Vector2(867, 535)
 
 [node name="HUD" parent="." instance=ExtResource("4_eavn0")]
-offset_left = 33.0
-offset_top = 29.0
-offset_right = 329.0
-offset_bottom = 62.0
+offset_left = 32.0
+offset_top = 27.0
+offset_right = 328.0
+offset_bottom = 60.0
+
+[node name="HealthProgressBar" parent="HUD/HBoxContainer" index="1"]
+value = 84.0
 
 [editable path="Player"]
 [editable path="HUD"]
+[editable path="HUD/HBoxContainer/VBoxContainer/SystemTestControls"]

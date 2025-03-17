@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dlgntwrk14g2e"]
+[gd_scene load_steps=10 format=3 uid="uid://dlgntwrk14g2e"]
 
 [ext_resource type="Script" path="res://enemies/Area2D.gd" id="1_8i8vp"]
 [ext_resource type="Texture2D" uid="uid://btvy2jaoxbr1k" path="res://enemies/UI_Flags_Indivudal_g880.png" id="1_gfoke"]
@@ -47,6 +47,13 @@ _data = {
 "flash": SubResource("Animation_n0o03")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tb1sw"]
+bg_color = Color(0, 0, 0, 0.721569)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yewkr"]
 size = Vector2(421, 272)
 
@@ -66,6 +73,17 @@ texture = ExtResource("1_gfoke")
 libraries = {
 "": SubResource("AnimationLibrary_p4shw")
 }
+
+[node name="EnemyHealth" type="ProgressBar" parent="enemySprite"]
+modulate = Color(0.988235, 0.00392157, 0.00392157, 1)
+offset_left = -172.286
+offset_top = -203.429
+offset_right = 144.714
+offset_bottom = -176.429
+theme_override_styles/background = SubResource("StyleBoxFlat_tb1sw")
+value = 100.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1001, 405)
