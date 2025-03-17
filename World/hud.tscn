@@ -1,28 +1,52 @@
-[gd_scene load_steps=2 format=3 uid="uid://dr4a7dktdlw1w"]
+[gd_scene load_steps=4 format=3 uid="uid://dr4a7dktdlw1w"]
 
 [ext_resource type="Script" path="res://World/hud.gd" id="1_62yqp"]
+[ext_resource type="PackedScene" uid="uid://bg3rgjjrtacnl" path="res://SystemControls/system_test_controls.tscn" id="2_nxuyw"]
 
-[node name="HUD" type="MarginContainer"]
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 50.0
-offset_bottom = 73.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cr7dg"]
+bg_color = Color(0.6, 0.6, 0.6, 0.027451)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 0.521569)
+
+[node name="HUD" type="MarginContainer" node_paths=PackedStringArray("heal_ref", "damage_ref", "score_ref")]
+anchors_preset = -1
+anchor_left = 0.009
+anchor_top = 0.06
+anchor_right = 0.326
+anchor_bottom = 0.105815
+offset_left = 0.719999
+offset_top = 0.199997
+offset_right = -0.919983
+offset_bottom = -0.280006
 grow_horizontal = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
 script = ExtResource("1_62yqp")
+heal_ref = NodePath("HBoxContainer/VBoxContainer/SystemTestControls")
+damage_ref = NodePath("HBoxContainer/VBoxContainer/SystemTestControls")
+score_ref = NodePath("HBoxContainer/VBoxContainer/SystemTestControls")
+metadata/_edit_use_anchors_ = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
+theme_override_constants/separation = 25
 
 [node name="HealthTitleLabel" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "Health"
 
 [node name="HealthProgressBar" type="ProgressBar" parent="HBoxContainer"]
-modulate = Color(1, 0, 0, 1)
+modulate = Color(0.14349, 1, 0.127226, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_cr7dg")
 value = 35.0
 show_percentage = false
 
@@ -35,3 +59,15 @@ layout_mode = 2
 
 [node name="ScoreLabel" type="Label" parent="HBoxContainer"]
 layout_mode = 2
+text = "999999999"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="SystemTestControls" parent="HBoxContainer/VBoxContainer" instance=ExtResource("2_nxuyw")]
+layout_mode = 2
+
+[connection signal="health_added" from="HBoxContainer/VBoxContainer/SystemTestControls" to="." method="_on_system_test_controls_health_added"]
+[connection signal="health_damage" from="HBoxContainer/VBoxContainer/SystemTestControls" to="." method="_on_system_test_controls_health_damage"]
+
+[editable path="HBoxContainer/VBoxContainer/SystemTestControls"]
